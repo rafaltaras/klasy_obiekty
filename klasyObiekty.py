@@ -1,12 +1,6 @@
 from faker import Faker
 fake = Faker()
 
-imie=fake.first_name()
-nazwisko=fake.last_name()
-nazwa_firmy=fake.company()
-adres_email=fake.email()
-
-
 class ksiazkaAdresowa():
     def __init__(self, imie, nazwisko, nazwa_firmy, adres_email):
         self.imie = imie

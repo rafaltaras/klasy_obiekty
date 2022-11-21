@@ -25,7 +25,7 @@ class BusinessContact(BaseContact):
         self._contact = f"Wybieram numer {self.business_phone} i dzwonię do {self.first_name} {self.last_name}"
 
 
-def create_contacts(type, )
+# def create_contacts(type, )
 
 business_card1 = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
 business_card2 = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )

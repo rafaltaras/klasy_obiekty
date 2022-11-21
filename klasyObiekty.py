@@ -7,30 +7,36 @@ class ksiazkaAdresowa():
         self.nazwisko = nazwisko
         self.nazwa_firmy = nazwa_firmy
         self.adres_email = adres_email
-    
-    def __str__(self):
-        return f"{self.imie} {self.nazwisko} {self.adres_email}"
 
-    def __repr__(self):
-        return f"{self.imie} {self.nazwisko} {self.adres_email}"
+        self._contact = f"Kontaktuje sie z  {self.imie} {self.nazwisko} {self.adres_email}"
+        self._sumlen = 0
+
+    def __len__(self):
+        return  len(self.imie) + len(self.nazwisko) + 1
+    
+    # @property
+    # def sumlen(self):
+    #     return self._sumlen
+    
+    # @sumlen.setter
+    # def sumlen(self):
+    #     self._sumlen = len()
+    #     return  self._sumlen
+
+    # def __str__(self):
+    #     return f"{self.imie} {self.nazwisko} {self.adres_email}"
+
+    # def __repr__(self):
+    #     return f"{self.imie} {self.nazwisko} {self.adres_email}"
 
 wizytowka1 = ksiazkaAdresowa(imie=fake.first_name(), nazwisko=fake.last_name(), nazwa_firmy=fake.company(), adres_email=fake.email())
-print(wizytowka1)
+print(wizytowka1._contact)
+print(len(wizytowka1))
 
-wizytowka2 = ksiazkaAdresowa(imie=fake.first_name(), nazwisko=fake.last_name(), nazwa_firmy=fake.company(), adres_email=fake.email())
-print(wizytowka2)
+# wizytowka2 = ksiazkaAdresowa(imie=fake.first_name(), nazwisko=fake.last_name(), nazwa_firmy=fake.company(), adres_email=fake.email())
+# print(wizytowka2)
 
-wizytowka3 = ksiazkaAdresowa(imie=fake.first_name(), nazwisko=fake.last_name(), nazwa_firmy=fake.company(), adres_email=fake.email())
-print(wizytowka3)
-
-wizytowki = [wizytowka1, wizytowka2, wizytowka3]
-print(wizytowki)
-print("")
-by_name = sorted(wizytowki, key=lambda wizytowka: wizytowka.imie)
-print(by_name)
-by_lastname = sorted(wizytowki, key=lambda wizytowka: wizytowka.nazwisko)
-print(by_lastname)
-by_email = sorted(wizytowki, key=lambda wizytowka: wizytowka.adres_email)
-print(by_email)
+# wizytowka3 = ksiazkaAdresowa(imie=fake.first_name(), nazwisko=fake.last_name(), nazwa_firmy=fake.company(), adres_email=fake.email())
+# print(wizytowka3)
 
 

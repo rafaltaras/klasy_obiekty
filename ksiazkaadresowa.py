@@ -17,6 +17,10 @@ class BaseContact():
         return f"{self.first_name} {self.last_name} {self.company_phone} {self.address_email}"
 
     @property
+    def basecontact(self):
+        return f"{self.first_name} {self.last_name} {self.company_phone} {self.address_email}"
+
+    @property
     def label_lenght(self):
         return len(self.first_name) + len(str(" ")) + len(self.last_name)
  
@@ -29,15 +33,20 @@ class BusinessContact(BaseContact):
     
         self._contact = f"Wybieram numer {self.business_phone} i dzwonię do {self.first_name} {self.last_name}"
         
+    @property
+    def businesscontact(self):
+        return f"{self.first_name} {self.last_name} {self.position} {self.company_name}"
 
 def create_contacts(contact_type, quantity):
     for i in range (0, quantity):
         if contact_type == "base":
             card = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
-            results.append(card)
+            cards = card.basecontact
+            results.append(cards)
         elif contact_type == "business":
             card = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
-            results.append(card)
+            cards = card.businesscontact
+            results.append(cards)
     return results
 
 def show_results(results):
@@ -52,12 +61,11 @@ print (business_card1.label_lenght)
 print (business_card2)
 print (business_card2.label_lenght)
 print('')
-print("Wizytówki base")
-create_contacts(contact_type='base', quantity=5)
+# print("Wizytówki base")
+# create_contacts(contact_type='base', quantity=5)
+print('')
+print("Wizytówki bussines")
+create_contacts(contact_type='business', quantity=3)
 print(show_results(results))
-# print('')
-# print("Wizytówki bussines")
-# create_contacts(contact_type='business', quantity=3)
-
 
 

@@ -1,6 +1,8 @@
 from faker import Faker
 fake = Faker()
 
+results = []
+
 class BaseContact():
     def __init__(self, first_name, last_name, company_phone, address_email):
         self.first_name = first_name
@@ -10,6 +12,9 @@ class BaseContact():
 
     def __str__(self):
         return f"Wybieram numer {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
+
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name} {self.company_phone} {self.address_email}"
 
     @property
     def label_lenght(self):
@@ -23,14 +28,21 @@ class BusinessContact(BaseContact):
         self.business_phone = business_phone
     
         self._contact = f"Wybieram numer {self.business_phone} i dzwonię do {self.first_name} {self.last_name}"
+        
 
 def create_contacts(contact_type, quantity):
-    value = 0
-    while value < quantity:
+    for i in range (0, quantity):
         if contact_type == "base":
-            return BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
-        value += 1
-            
+            card = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
+            results.append(card)
+        elif contact_type == "business":
+            card = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
+            results.append(card)
+    return results
+
+def show_results(results):
+    for i in results:
+        print(i)
 
 business_card1 = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
 business_card2 = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
@@ -39,5 +51,13 @@ print (business_card1)
 print (business_card1.label_lenght)
 print (business_card2)
 print (business_card2.label_lenght)
-print(create_contacts(contact_type='base', quantity=10))
+print('')
+print("Wizytówki base")
+create_contacts(contact_type='base', quantity=5)
+print(show_results(results))
+# print('')
+# print("Wizytówki bussines")
+# create_contacts(contact_type='business', quantity=3)
+
+
 

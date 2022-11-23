@@ -36,10 +36,10 @@ def create_contacts(contact_type, quantity):
     for i in range (0, quantity):
         if contact_type == "base":
             card = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
-            results.append(card.__repr__())
+            results.append(card)
         elif contact_type == "business":
             card = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
-            results.append(card.businesscontact())
+            results.append(card)
     return results
 
 

@@ -9,14 +9,11 @@ class BaseContact():
         self.company_phone = company_phone
         self.address_email = address_email
 
-    # def __str__(self):
-    #     return f"Wybieram numer {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
+    def __str__(self):
+        return f"Wybieram  {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
 
     def __repr__(self):
         return f"{self.first_name} {self.last_name} {self.company_phone} {self.address_email}"
-
-    def basecontact(self):
-        return f"Wybieram numer {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
 
     @property
     def label_lenght(self):
@@ -39,28 +36,31 @@ def create_contacts(contact_type, quantity):
     for i in range (0, quantity):
         if contact_type == "base":
             card = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
-            # cards = card.basecontact
-            results.append(card)
+            results.append(card.__repr__())
         elif contact_type == "business":
             card = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
-            # cards = card.businesscontact
             results.append(card.businesscontact())
-    for i in results:
-        print(i)
+    return results
+
 
 business_card1 = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
 business_card2 = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
 
-print (business_card1.basecontact())
+print (business_card1)
 print (business_card1.label_lenght)
-print (business_card2.basecontact())
+print (business_card2)
 print (business_card2.label_lenght)
-# print('')
-# print("Wizytówki base")
-# create_contacts(contact_type='base', quantity=5)
 print('')
-print("Wizytówki bussines")
-create_contacts(contact_type='business', quantity=2)
 
+# print("Wizytówki base")
+# contacts = create_contacts(contact_type='base', quantity=5)
+# for contact in contacts:
+#     print(contact)
+# # print('')
+
+print("Wizytówki bussines")
+contacts = create_contacts(contact_type='business', quantity=2)
+for contact in contacts:
+    print(contact)
 
 

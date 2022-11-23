@@ -1,7 +1,6 @@
 from faker import Faker
 fake = Faker()
 
-results = []
 
 class BaseContact():
     def __init__(self, first_name, last_name, company_phone, address_email):
@@ -10,15 +9,14 @@ class BaseContact():
         self.company_phone = company_phone
         self.address_email = address_email
 
-    def __str__(self):
-        return f"Wybieram numer {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
+    # def __str__(self):
+    #     return f"Wybieram numer {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
 
     def __repr__(self):
         return f"{self.first_name} {self.last_name} {self.company_phone} {self.address_email}"
 
-    @property
     def basecontact(self):
-        return f"{self.first_name} {self.last_name} {self.company_phone} {self.address_email}"
+        return f"Wybieram numer {self.company_phone} i dzwonię do {self.first_name} {self.last_name}"
 
     @property
     def label_lenght(self):
@@ -33,39 +31,36 @@ class BusinessContact(BaseContact):
     
         self._contact = f"Wybieram numer {self.business_phone} i dzwonię do {self.first_name} {self.last_name}"
         
-    @property
     def businesscontact(self):
         return f"{self.first_name} {self.last_name} {self.position} {self.company_name}"
 
 def create_contacts(contact_type, quantity):
+    results = []
     for i in range (0, quantity):
         if contact_type == "base":
             card = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
-            cards = card.basecontact
-            results.append(cards)
+            # cards = card.basecontact
+            results.append(card)
         elif contact_type == "business":
             card = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
-            cards = card.businesscontact
-            results.append(cards)
-    return results
-
-def show_results(results):
+            # cards = card.businesscontact
+            results.append(card.businesscontact())
     for i in results:
         print(i)
 
 business_card1 = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email())
 business_card2 = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(), company_phone=fake.msisdn(), address_email=fake.email(), position=fake.job(), company_name=fake.company(), business_phone=fake.phone_number() )
 
-print (business_card1)
+print (business_card1.basecontact())
 print (business_card1.label_lenght)
-print (business_card2)
+print (business_card2.basecontact())
 print (business_card2.label_lenght)
-print('')
+# print('')
 # print("Wizytówki base")
 # create_contacts(contact_type='base', quantity=5)
 print('')
 print("Wizytówki bussines")
-create_contacts(contact_type='business', quantity=3)
-print(show_results(results))
+create_contacts(contact_type='business', quantity=2)
+
 
 
